@@ -12,8 +12,8 @@ router.post('/Login', userController.userLogin)
 
 //Books API
 router.post('/books',middleware.tokenValidator,booksController. createBook )
-router.get("/books",booksController.getAllBooks)
-router.get("/books/:bookId",booksController.getBooksById)
+router.get("/books",middleware.tokenValidator,booksController.getAllBooks)
+router.get("/books/:bookId",middleware.tokenValidator,booksController.getBooksById)
 router.put("/books/:bookId",middleware.tokenValidator,booksController.updateBook)
 router.delete("/books/:bookId",middleware.tokenValidator,booksController.deleteBooksById )
 

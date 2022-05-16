@@ -118,12 +118,17 @@ const createUser = async (req, res) => {
        
 
         //address---------------------------------------------------------------------------------------------------
+        if(typeof data.address !== 'object' || Array.isArray(data.address) || Object.keys(data.address).length==0){
+            
+            return res.status(400).send({status:false , message: "address should be of type object and if address is given it should not be empty"})
+        }
+
         let street = data.address.street
         let city = data.address.city
         let pincode = data.address.pincode
         if(street){
             let validateStreet = /^[a-zA-Z0-9]/
-            if (!validateStreet.test(street)) {
+            if (!validateStreet.test.trim(street)) {
                 return res.status(400).send({ status: false, message: "enter valid street name" })
             }
         }
